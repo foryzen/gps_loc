@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="click_btn()">取得する</button>
+    <p>緯度, 経度：<span id="latitude">???</span></p>
+
+    <script>
+        function click_btn(){
+        navigator.geolocation.getCurrentPosition(successCallback)
+        }
+
+        function successCallback(position){
+        var location = position.coords.latitude+", "+position.coords.longitude
+        document.getElementById("latitude").innerHTML = location
+        }
+    </script>
+</body>
+</html>

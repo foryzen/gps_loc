@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+}
+
+.txt {
+    font-size: 30px;
+    font-family: '游明朝';
+    display: inline-block;
+    margin: 20px 0 0 20px;
+    padding: 10px 20px 10px 20px;
+    background: #000;
+    cursor: pointer;
+    color: #fff;
+}
+
+.txt:hover {
+    background: #444;
+}
+
+#location_txt {
+    padding: 10px 20px 10px 20px;
+    font-size: 30px;
+    font-family: '游明朝';
+    display: inline-block;
+    margin: 20px 0 0 20px;
+    color: #000;
+    border: solid 1px black;
+}
